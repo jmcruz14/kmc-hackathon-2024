@@ -1,3 +1,3 @@
 <template>
-  <input type="checkbox" value="night" class="toggle theme-controller" />
+  <input type="checkbox" value="sunset" class="toggle theme-controller" />
 </template>
