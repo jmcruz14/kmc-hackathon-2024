@@ -1,6 +1,7 @@
 <template>
   <NavBar location="top">
-    <div class="flex justify-end w-full">
+    <div class="flex justify-between w-full">
+      <span class="text-2xl font-extrabold">Bridgette</span>
       <ThemeController></ThemeController>
     </div>
   </NavBar>
