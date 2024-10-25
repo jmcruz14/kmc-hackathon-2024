@@ -81,6 +81,7 @@ import NavBar from '@/components/NavBar.vue';
 import JobListings from '@/components/tabs/JobListings.vue';
 import Schedule from '@/components/tabs/Schedule.vue';
 import ApplicationStatuses from '@/components/tabs/ApplicationStatuses.vue';
+import ProfileView from '@/components/tabs/ProfileView.vue';
 
 import { useRoute, useRouter } from 'vue-router';
 import { ref, computed } from 'vue';
@@ -90,7 +91,8 @@ export default {
     Ribbon,
     NavBar,
     JobListings,
-    Schedule
+    Schedule,
+    ProfileView
   },
   setup () {
     const router = useRouter();
@@ -107,7 +109,7 @@ export default {
       'applications': ApplicationStatuses,
       'openings': JobListings,
       'schedule': Schedule,
-      'profile': JobListings,
+      'profile': ProfileView,
     }
 
     const currentHash = computed(() => {
