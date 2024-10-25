@@ -69,9 +69,62 @@
   </NavBar>
 
   <NavBar v-if="type === 'employer'">
-    <span class="text-xl">Dashboard</span>
-    <span class="text-xl">Applications</span>
-    <span class="text-xl">Schedule</span>
+    <button 
+      class="btn btn-ghost gap-4 hover:bg-base-300 transition-colors duration-200"
+      :class="{ 'text-primary font-bold': currentRoute === 'dashboard' }"
+      @click="navigateTo('employer-dashboard')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+      </svg>
+      <span class="text-lg">Dashboard</span>
+      <div class="ml-auto">
+        <div v-if="pendingTasks" class="badge badge-primary badge-sm">{{ pendingTasks }}</div>
+      </div>
+    </button>
+
+    <!-- Applications Button -->
+    <button 
+      class="btn btn-ghost gap-4 hover:bg-base-300 transition-colors duration-200"
+      :class="{ 'text-primary font-bold': currentRoute === 'applications' }"
+      @click="navigateTo('applications')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+      <span class="text-lg">Applications</span>
+      <div class="ml-auto">
+        <div v-if="newApplications" class="badge badge-accent badge-sm">{{ newApplications }}</div>
+      </div>
+    </button>
+
+    <!-- Schedule Button -->
+    <button 
+      class="btn btn-ghost gap-4 hover:bg-base-300 transition-colors duration-200"
+      :class="{ 'text-primary font-bold': currentRoute === 'schedule' }"
+      @click="navigateTo('schedule')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      <span class="text-lg">Schedule</span>
+      <div class="ml-auto">
+        <div v-if="scheduledInterviews" class="badge badge-secondary badge-sm">{{ scheduledInterviews }}</div>
+      </div>
+    </button>
+
+    <!-- Settings Button -->
+    <!-- <button 
+      class="btn btn-ghost gap-4 hover:bg-base-300 transition-colors duration-200"
+      :class="{ 'text-primary font-bold': currentRoute === 'settings' }"
+      @click="navigateTo('settings')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <span class="text-lg">Settings</span>
+    </button> -->
   </NavBar>
 </template>
 
@@ -85,6 +138,7 @@ import ProfileView from '@/components/tabs/ProfileView.vue';
 
 import { useRoute, useRouter } from 'vue-router';
 import { ref, computed } from 'vue';
+import EmployerDashboard from '../components/tabs/EmployerDashboard.vue';
 
 export default {
   components: {
@@ -92,7 +146,8 @@ export default {
     NavBar,
     JobListings,
     Schedule,
-    ProfileView
+    ProfileView,
+    EmployerDashboard
   },
   setup () {
     const router = useRouter();
@@ -110,6 +165,7 @@ export default {
       'openings': JobListings,
       'schedule': Schedule,
       'profile': ProfileView,
+      'employer-dashboard': EmployerDashboard
     }
 
     const currentHash = computed(() => {
@@ -118,7 +174,6 @@ export default {
 
     // Navigation function using Vue Router
     const navigateTo = (hash) => {
-      console.warn('change activated', hash)
       activeTab.value = hash;
       // Preserve current route and just update the hash
       router.push({
