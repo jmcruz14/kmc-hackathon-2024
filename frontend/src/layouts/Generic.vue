@@ -7,3 +7,10 @@
   </div>
 </template>
 
+<script setup>
+import daisyColors from 'daisyui/src/theming/themes'
+
+console.warn(daisyColors)
+
+</script>
+

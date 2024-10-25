@@ -1,7 +1,9 @@
 <template>
-  <div class="w-full bg-base-100 border-white-200 shadow-sm"
-    :class="borderClass">
-    <div class="p-2 m-2">
+  <div 
+    class="w-full bg-base-100 border-white-200 shadow-sm"
+    :class="borderClass"
+  >
+    <div class="p-2 m-2 flex justify-around gap-2">
       <slot />
     </div>
   </div>
